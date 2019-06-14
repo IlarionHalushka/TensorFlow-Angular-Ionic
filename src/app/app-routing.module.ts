@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' }
+  // { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  // { path: '', loadChildren: './tab1/tab1.module#Tab1PageModule' },
+  { path: '', loadChildren: './imageClassifier/image-classifier.module#ImageClassifierPageModule' }
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 import {DrawableDirective} from './drawable.directive';
 
-
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
@@ -33,7 +32,7 @@ export class TabsPage implements OnInit {
     const pred = await tf.tidy(() => {
       // Convert the canvas pixels to
       let img = tf.browser.fromPixels(imageData, 1);
-      img = img.reshape([1, 28, 28, 1]);
+      img = img.reshape([1, 28, 28]);
       img = tf.cast(img, 'float32');
 
       // Make and format the predications
