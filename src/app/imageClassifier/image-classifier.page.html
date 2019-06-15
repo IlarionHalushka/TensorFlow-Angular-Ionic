@@ -1,3 +1,15 @@
 <div class="container">
   <ion-title>Image Classifier</ion-title>
+  <!--<input type="file" (change)="predict($event.target.files[0])">-->
+  <!--<div>-->
+    <!--<label for="singleFile">Upload file(s) for prediction</label><br>-->
+    <!--<input id="singleFile" type="file" (change)="predict($event.target.files[0])" />-->
+  <!--</div> -->
+  <input type='file' (change)="readURL($event);" />
+  <img id="blah" [src]="imageSrc" alt="your image" (load)="predict($event.target)" />
+  <!--<img [src]="imageSrc" alt="Photo to predict" (load)="predict($event.target)" >-->
+  <!--<ion-button (click)="predict()">Predict</ion-button>-->
+  <ng-container *ngIf="predictions && predictions.length">
+    <div *ngFor="let prediction of predictions">Prediction: {{ prediction.label }}  {{prediction.confidence}}</div>
+  </ng-container>
 </div>
