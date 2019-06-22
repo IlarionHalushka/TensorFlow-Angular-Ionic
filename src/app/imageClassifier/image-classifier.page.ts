@@ -26,6 +26,7 @@ export class ImageClassifierPage implements OnInit {
   }
 
   async predict(img) {
+    console.log('PREDICT');
     this.predictions = await this.classifier.predict(img);
   }
 

@@ -26,11 +26,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
+        path: 'imageClassifier',
         children: [
           {
             path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
+            loadChildren: '../imageClassifier/image-classifier.module#ImageClassifierPageModule'
           }
         ]
       },
