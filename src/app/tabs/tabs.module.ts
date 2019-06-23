@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { DrawableDirective } from './drawable.directive';
 
 @NgModule({
   imports: [
@@ -15,6 +14,6 @@ import { DrawableDirective } from './drawable.directive';
     FormsModule,
     TabsPageRoutingModule,
   ],
-  declarations: [TabsPage, DrawableDirective]
+  declarations: [TabsPage]
 })
 export class TabsPageModule {}

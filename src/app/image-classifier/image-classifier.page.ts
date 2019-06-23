@@ -5,7 +5,6 @@ declare let ml5: any;
 @Component({
   selector: 'app-image-classifier',
   templateUrl: 'image-classifier.page.html',
-  styleUrls: ['image-classifier.page.scss']
 })
 export class ImageClassifierPage implements OnInit {
   MODEL = 'MobileNet';

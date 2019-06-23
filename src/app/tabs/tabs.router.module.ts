@@ -8,11 +8,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'predict-number',
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: '../predict-number/predict-number.module#Tab1PageModule'
           }
         ]
       },
@@ -26,24 +26,24 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'imageClassifier',
+        path: 'image-classifier',
         children: [
           {
             path: '',
-            loadChildren: '../imageClassifier/image-classifier.module#ImageClassifierPageModule'
+            loadChildren: '../image-classifier/image-classifier.module#ImageClassifierPageModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/predict-number',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/predict-number',
     pathMatch: 'full'
   }
 ];
