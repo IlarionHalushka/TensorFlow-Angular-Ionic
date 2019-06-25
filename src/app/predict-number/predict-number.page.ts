@@ -7,13 +7,12 @@ import {DrawableDirective} from './drawable.directive';
   templateUrl: 'predict-number.page.html',
 })
 export class PredictNumberPage implements OnInit {
-
   linearModel: tf.Sequential;
   prediction: any;
   predictedNumber: string;
-
   model: any;
   predictions: any;
+  loading: boolean;
 
   @ViewChild(DrawableDirective) canvas;
 
@@ -22,7 +21,9 @@ export class PredictNumberPage implements OnInit {
   }
 
   async loadModel() {
+    this.loading = true;
     this.model = await tf.loadLayersModel('/assets/model.json');
+    this.loading = false;
   }
 
   async predict(imageData: ImageData) {

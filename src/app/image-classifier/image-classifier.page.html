@@ -1,6 +1,10 @@
 <ion-header padding type="primary">Image Classifier</ion-header>
 <ion-content>
-    <ion-card>
+    <ng-container *ngIf="loading" >
+        <ion-spinner></ion-spinner>
+        <ion-text>Loading model</ion-text>
+    </ng-container>
+    <ion-card *ngIf="!loading">
         <ion-card-header>
             <input type='file' (change)="readURL($event);" />
         </ion-card-header>

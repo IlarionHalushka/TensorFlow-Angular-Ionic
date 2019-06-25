@@ -11,6 +11,7 @@ export class ImageClassifierPage implements OnInit {
   IMAGE_SIZE = 224;
   imageSrc: string | ArrayBuffer;
   predictions: Array<object>;
+  loading: boolean;
 
   @Input() classifier;
   @Input() image;
@@ -19,8 +20,10 @@ export class ImageClassifierPage implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.classifier = ml5.imageClassifier(this.MODEL, () => {
       console.log('Model Loaded!');
+      this.loading = false;
     });
   }
 
