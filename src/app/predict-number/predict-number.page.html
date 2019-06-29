@@ -6,23 +6,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ng-container *ngIf="loading" >
-    <ion-spinner></ion-spinner>
-    <ion-text>Loading model</ion-text>
-  </ng-container>
-  <div *ngIf="!loading" class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm">
-        <h3>Draw a number between 0 to 9</h3>
-        <div class="wrapper">
-          <canvas drawable (newImage)="predict($event)"></canvas><br>
-        </div>
-        <button class="btn btn-sm btn-warning" (click)="canvas.clear();clear();">Erase</button>
-      </div>
-    </div>
-    <div>
+<ion-content padding>
+  <ion-card padding>
+    <ng-container *ngIf="loading" >
+      <ion-spinner></ion-spinner>
+      <ion-text>Loading model</ion-text>
+    </ng-container>
+    <div *ngIf="!loading">
+      <h3>Draw a number between 0 to 9</h3>
+      <canvas drawable (newImage)="predict($event)"></canvas><br>
+      <ion-button color="danger" (click)="canvas.clear();clear();">Erase</ion-button>
       <h1>Predicted Number: {{predictedNumber}}</h1>
     </div>
-  </div>
+  </ion-card>
 </ion-content>
