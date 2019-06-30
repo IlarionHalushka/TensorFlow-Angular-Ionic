@@ -8,20 +8,20 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'predict-number',
-        children: [
-          {
-            path: '',
-            loadChildren: '../predict-number/predict-number.module#Tab1PageModule'
-          }
-        ]
-      },
-      {
         path: 'image-classifier',
         children: [
           {
             path: '',
             loadChildren: '../image-classifier/image-classifier.module#ImageClassifierPageModule'
+          }
+        ]
+      },
+      {
+        path: 'predict-number',
+        children: [
+          {
+            path: '',
+            loadChildren: '../predict-number/predict-number.module#Tab1PageModule'
           }
         ]
       },
