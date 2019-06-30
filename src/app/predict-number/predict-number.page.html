@@ -14,7 +14,7 @@
     </ng-container>
     <div *ngIf="!loading">
       <h3>Draw a number between 0 to 9</h3>
-      <canvas drawable (newImage)="predict($event)"></canvas><br>
+      <canvas class="draw-area"  drawable (newImage)="predict($event)" width="140" height="140"></canvas><br>
       <ion-button color="danger" (click)="canvas.clear();clear();">Erase</ion-button>
       <h1>Predicted Number: {{predictedNumber}}</h1>
     </div>

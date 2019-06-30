@@ -5,6 +5,7 @@ import {DrawableDirective} from './drawable.directive';
 @Component({
   selector: 'app-predict-number',
   templateUrl: 'predict-number.page.html',
+  styleUrls: ['predict-number.page.scss']
 })
 export class PredictNumberPage implements OnInit {
   linearModel: tf.Sequential;
