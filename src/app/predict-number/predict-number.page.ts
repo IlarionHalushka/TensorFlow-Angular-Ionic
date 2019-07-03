@@ -2,18 +2,18 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 import {DrawableDirective} from './drawable.directive';
 
+const pathToModel = '/assets/model.json';
+
 @Component({
   selector: 'app-predict-number',
   templateUrl: 'predict-number.page.html',
   styleUrls: ['predict-number.page.scss']
 })
 export class PredictNumberPage implements OnInit {
-  linearModel: tf.Sequential;
-  prediction: any;
   predictedNumber: string;
-  model: any;
-  predictions: any;
   loading: boolean;
+  private model: any;
+  private predictions: any;
 
   @ViewChild(DrawableDirective) canvas;
 
@@ -23,12 +23,12 @@ export class PredictNumberPage implements OnInit {
 
   async loadModel() {
     this.loading = true;
-    this.model = await tf.loadLayersModel('/assets/model.json');
+    this.model = await tf.loadLayersModel(pathToModel);
     this.loading = false;
   }
 
   async predict(imageData: ImageData) {
-    const pred = await tf.tidy(() => {
+    await tf.tidy(() => {
       // Convert the canvas pixels to
       let img = tf.browser.fromPixels(imageData, 1);
       // @ts-ignore
@@ -36,7 +36,7 @@ export class PredictNumberPage implements OnInit {
       img = tf.cast(img, 'float32');
 
       // Make and format the predications
-      const output = this.model.predict(img) as any;
+      const output = this.model.predict(img);
 
       // Save predictions on the component
       this.predictions = Array.from(output.dataSync());

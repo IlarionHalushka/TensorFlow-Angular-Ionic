@@ -7,8 +7,8 @@ declare let ml5: any;
   templateUrl: 'image-classifier.page.html',
 })
 export class ImageClassifierPage implements OnInit {
-  MODEL = 'MobileNet';
-  IMAGE_SIZE = 224;
+  private MODEL = 'MobileNet';
+  private IMAGE_SIZE = 224;
   imageSrc: string | ArrayBuffer;
   predictions: Array<object>;
   loading: boolean;
@@ -19,16 +19,13 @@ export class ImageClassifierPage implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loading = true;
-    this.classifier = ml5.imageClassifier(this.MODEL, () => {
-      console.log('Model Loaded!');
-      this.loading = false;
-    });
+    this.classifier = await ml5.imageClassifier(this.MODEL);
+    this.loading = false;
   }
 
   async predict(img) {
-    console.log('PREDICT');
     this.predictions = await this.classifier.predict(img);
   }
 
