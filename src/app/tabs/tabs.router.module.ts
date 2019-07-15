@@ -12,7 +12,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../image-classifier/image-classifier.module#ImageClassifierPageModule'
+            loadChildren:
+              '../image-classifier/image-classifier.module#ImageClassifierPageModule'
           }
         ]
       },
@@ -21,7 +22,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../predict-number/predict-number.module#Tab1PageModule'
+            loadChildren:
+              '../predict-number/predict-number.module#Tab1PageModule'
           }
         ]
       },
@@ -40,9 +42,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class TabsPageRoutingModule {}

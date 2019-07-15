@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
-import {DrawableDirective} from './drawable.directive';
+import { DrawableDirective } from './drawable.directive';
 
 const pathToModel = '/assets/model.json';
 
@@ -50,11 +50,9 @@ export class PredictNumberPage implements OnInit {
       }
       this.predictedNumber = `${indexMaxValue}`;
     });
-
   }
 
   clear() {
     this.predictedNumber = '';
   }
-
 }

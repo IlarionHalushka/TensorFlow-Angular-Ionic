@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 declare let ml5: any;
 
 @Component({
   selector: 'app-image-classifier',
-  templateUrl: 'image-classifier.page.html',
+  templateUrl: 'image-classifier.page.html'
 })
 export class ImageClassifierPage implements OnInit {
   private MODEL = 'MobileNet';
@@ -16,8 +16,7 @@ export class ImageClassifierPage implements OnInit {
   @Input() classifier;
   @Input() image;
 
-  constructor() {
-  }
+  constructor() {}
 
   async ngOnInit() {
     this.loading = true;
@@ -39,7 +38,7 @@ export class ImageClassifierPage implements OnInit {
       file.height = this.IMAGE_SIZE;
 
       const reader = new FileReader();
-      reader.onload = () => this.imageSrc = reader.result;
+      reader.onload = () => (this.imageSrc = reader.result);
 
       reader.readAsDataURL(file);
     }

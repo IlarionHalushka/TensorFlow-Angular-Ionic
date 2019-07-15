@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-
 // https://medium.com/@dhormale/integrate-machine-learning-tensorflow-model-with-angular-d72ec9287520
 
 @Component({
