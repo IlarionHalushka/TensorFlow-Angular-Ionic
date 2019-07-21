@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
-import { DrawableDirective } from './drawable.directive';
+import { DrawableDirective } from '../directives/drawable.directive';
 
 const pathToModel = '/assets/model.json';
 

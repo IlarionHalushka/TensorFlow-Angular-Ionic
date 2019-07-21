@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PredictNumberPage } from './predict-number.page';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DrawableDirective } from './drawable.directive';
+import { DrawableDirective } from '../directives/drawable.directive';
 
 @NgModule({
   imports: [
