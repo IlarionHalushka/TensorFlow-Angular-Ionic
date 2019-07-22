@@ -21,6 +21,24 @@ export class PredictNumberPage implements OnInit {
     this.loadModel();
   }
 
+  private pixelsToShape(imageData) {
+    let img = tf.browser.fromPixels(imageData, 1);
+    // @ts-ignore
+    img = img.reshape([1, 28, 28, 1]);
+    return tf.cast(img, 'float32');
+  }
+
+  private getIndexMaxValue() {
+    let indexMaxValue = 0;
+
+    for (let i = 0; i < this.predictions.length; i++) {
+      if (this.predictions[i] > this.predictions[indexMaxValue]) {
+        indexMaxValue = i;
+      }
+    }
+    return `${indexMaxValue}`;
+  }
+
   async loadModel() {
     this.loading = true;
     this.model = await tf.loadLayersModel(pathToModel);
@@ -29,26 +47,9 @@ export class PredictNumberPage implements OnInit {
 
   async predict(imageData: ImageData) {
     await tf.tidy(() => {
-      // Convert the canvas pixels to
-      let img = tf.browser.fromPixels(imageData, 1);
-      // @ts-ignore
-      img = img.reshape([1, 28, 28, 1]);
-      img = tf.cast(img, 'float32');
-
-      // Make and format the predications
-      const output = this.model.predict(img);
-
-      // Save predictions on the component
-      this.predictions = Array.from(output.dataSync());
-
-      let indexMaxValue = 0;
-
-      for (let i = 0; i < this.predictions.length; i++) {
-        if (this.predictions[i] > this.predictions[indexMaxValue]) {
-          indexMaxValue = i;
-        }
-      }
-      this.predictedNumber = `${indexMaxValue}`;
+      const img = this.pixelsToShape(imageData);
+      this.predictions = Array.from(this.model.predict(img).dataSync());
+      this.predictedNumber = this.getIndexMaxValue();
     });
   }
 
