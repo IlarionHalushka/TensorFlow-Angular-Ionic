@@ -23,7 +23,17 @@ const routes: Routes = [
           {
             path: '',
             loadChildren:
-              '../predict-number/predict-number.module#Tab1PageModule'
+              '../predict-number/predict-number.module#PredictNumberModule'
+          }
+        ]
+      },
+      {
+        path: 'image-recognition',
+        children: [
+          {
+            path: '',
+            loadChildren:
+              '../image-recognition/image-recognition.module#ImageRecognitionPageModule'
           }
         ]
       },

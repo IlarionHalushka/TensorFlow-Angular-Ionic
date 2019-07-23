@@ -15,4 +15,4 @@ import { DrawableDirective } from '../directives/drawable.directive';
   ],
   declarations: [PredictNumberPage, DrawableDirective]
 })
-export class Tab1PageModule {}
+export class PredictNumberModule {}
