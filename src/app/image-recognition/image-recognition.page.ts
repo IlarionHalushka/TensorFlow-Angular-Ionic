@@ -24,30 +24,33 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   @ViewChild('video') public video: ElementRef;
   @ViewChild('canvas') public canvas: ElementRef;
   public captures: Array<any>;
+
   constructor(private zone: NgZone) {
     this.captures = [];
   }
-  ngOnInit(): void {
+
+  ngOnInit() {
     this.mobileNetFeatureExtractor = ml5.featureExtractor('MobileNet', () => {
       this.featureClassifier = this.mobileNetFeatureExtractor.classification(
         this.video.nativeElement,
-        () => {
-          console.log('Vidéo ready');
-        }
+        () => console.log('Video ready')
       );
     });
   }
+
   addImage() {
     this.featureClassifier.addImage(this.newLabel);
     this.capture();
   }
+
   train() {
     this.iteration = 0;
     this.loss = 0;
     this.currentProgress = 0;
     this.featureClassifier.train(loss => {
-      if (loss == null) {
+      if (loss < 0.05) {
         this.iteration = 100;
+        this.currentProgress = 100;
         this.mobileNetFeatureExtractor.classify((e, r) => {
           this.gotResults(e, r);
         });
@@ -60,8 +63,8 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
       }
     });
   }
+
   public ngAfterViewInit() {
-    console.log(webkitURL);
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
         this.video.nativeElement.srcObject = stream;
@@ -71,23 +74,25 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   }
 
   public capture() {
-    const context = this.canvas.nativeElement
+    this.canvas.nativeElement
       .getContext('2d')
       .drawImage(this.video.nativeElement, 0, 0, 320, 240);
+
     this.captures.push(this.canvas.nativeElement.toDataURL('image/png'));
   }
 
   gotResults(err, results) {
     if (err) {
-      console.log(err);
-    } else {
-      this.zone.run(() => {
-        this.label = results[0].label;
-        this.confidence = results[0].confidence;
-      });
-      this.mobileNetFeatureExtractor.classify((e, r) => {
-        this.gotResults(e, r);
-      });
+      return console.error(err);
     }
+
+    this.zone.run(() => {
+      this.label = results[0].label;
+      this.confidence = results[0].confidence;
+    });
+
+    this.mobileNetFeatureExtractor.classify((e, r) => {
+      this.gotResults(e, r);
+    });
   }
 }
