@@ -23,10 +23,8 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   public iteration: number;
   @ViewChild('video') public video: ElementRef;
   @ViewChild('canvas') public canvas: ElementRef;
-  public captures: Array<any>;
 
   constructor(private zone: NgZone) {
-    this.captures = [];
   }
 
   ngOnInit() {
@@ -77,8 +75,6 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
     this.canvas.nativeElement
       .getContext('2d')
       .drawImage(this.video.nativeElement, 0, 0, 320, 240);
-
-    this.captures.push(this.canvas.nativeElement.toDataURL('image/png'));
   }
 
   gotResults(err, results) {
