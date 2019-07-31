@@ -21,24 +21,30 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   public currentProgress = 0;
   public loss: number;
   public iteration: number;
+  public results: Array<object>;
   @ViewChild('video') public video: ElementRef;
   @ViewChild('canvas') public canvas: ElementRef;
 
-  constructor(private zone: NgZone) {
-  }
+  constructor(private zone: NgZone) {}
 
   ngOnInit() {
-    this.mobileNetFeatureExtractor = ml5.featureExtractor('MobileNet', () => {
-      this.featureClassifier = this.mobileNetFeatureExtractor.classification(
-        this.video.nativeElement,
-        () => console.log('Video ready')
-      );
-    });
+    this.mobileNetFeatureExtractor = ml5.featureExtractor(
+      'MobileNet',
+      { numClasses: 3, numLabels: 3 },
+      () => {
+        this.featureClassifier = this.mobileNetFeatureExtractor.classification(
+          this.video.nativeElement,
+          () => console.log('Video ready')
+        );
+        console.log(this.mobileNetFeatureExtractor);
+        console.log(this.featureClassifier);
+      }
+    );
   }
 
-  addImage() {
+  async addImage() {
+    await this.capture();
     this.featureClassifier.addImage(this.newLabel);
-    this.capture();
   }
 
   train() {
@@ -71,8 +77,8 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
     }
   }
 
-  public capture() {
-    this.canvas.nativeElement
+  public async capture() {
+    await this.canvas.nativeElement
       .getContext('2d')
       .drawImage(this.video.nativeElement, 0, 0, 320, 240);
   }
@@ -85,6 +91,7 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
     this.zone.run(() => {
       this.label = results[0].label;
       this.confidence = results[0].confidence;
+      this.results = results.join(',');
     });
 
     this.mobileNetFeatureExtractor.classify((e, r) => {
