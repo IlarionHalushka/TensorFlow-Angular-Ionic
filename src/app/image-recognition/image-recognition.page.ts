@@ -18,10 +18,11 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   public label;
   public confidence;
   public newLabel;
-  public currentProgress = 0;
   public loss: number;
   public iteration: number;
   public results: Array<object>;
+  private TRAIN_ITERATIONS_LIMIT = 100;
+  private MINIMUM_LOSS = 0.01;
   @ViewChild('video') public video: ElementRef;
   @ViewChild('canvas') public canvas: ElementRef;
 
@@ -31,14 +32,11 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
     this.mobileNetFeatureExtractor = ml5.featureExtractor(
       'MobileNet',
       { numClasses: 3, numLabels: 3 },
-      () => {
-        this.featureClassifier = this.mobileNetFeatureExtractor.classification(
+      () =>
+        (this.featureClassifier = this.mobileNetFeatureExtractor.classification(
           this.video.nativeElement,
           () => console.log('Video ready')
-        );
-        console.log(this.mobileNetFeatureExtractor);
-        console.log(this.featureClassifier);
-      }
+        ))
     );
   }
 
@@ -50,17 +48,14 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   train() {
     this.iteration = 0;
     this.loss = 0;
-    this.currentProgress = 0;
     this.featureClassifier.train(loss => {
-      if (loss < 0.05) {
-        this.iteration = 100;
-        this.currentProgress = 100;
+      if (loss < this.MINIMUM_LOSS || this.iteration === this.TRAIN_ITERATIONS_LIMIT) {
+        this.iteration = this.TRAIN_ITERATIONS_LIMIT;
         this.mobileNetFeatureExtractor.classify((e, r) => {
           this.gotResults(e, r);
         });
       } else {
         this.zone.run(() => {
-          ++this.currentProgress;
           ++this.iteration;
           this.loss = loss;
         });
