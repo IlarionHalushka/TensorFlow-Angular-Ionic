@@ -19,8 +19,8 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   public confidence;
   public newLabel;
   public loss: number;
-  public iteration: number;
-  public results: Array<object>;
+  public iteration = 0;
+  public results: string;
   private TRAIN_ITERATIONS_LIMIT = 100;
   private MINIMUM_LOSS = 0.01;
   @ViewChild('video') public video: ElementRef;
@@ -86,7 +86,7 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
       this.zone.run(() => {
         this.label = results[0].label;
         this.confidence = results[0].confidence;
-        this.results = results;
+        this.results = JSON.stringify(results);
       });
     });
   }
