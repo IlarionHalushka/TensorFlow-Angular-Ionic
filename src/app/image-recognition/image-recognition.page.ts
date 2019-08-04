@@ -49,11 +49,11 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
     this.iteration = 0;
     this.loss = 0;
     this.featureClassifier.train(loss => {
-      if (loss < this.MINIMUM_LOSS || this.iteration === this.TRAIN_ITERATIONS_LIMIT) {
+      if (
+        loss < this.MINIMUM_LOSS ||
+        this.iteration === this.TRAIN_ITERATIONS_LIMIT
+      ) {
         this.iteration = this.TRAIN_ITERATIONS_LIMIT;
-        this.mobileNetFeatureExtractor.classify((e, r) => {
-          this.gotResults(e, r);
-        });
       } else {
         this.zone.run(() => {
           ++this.iteration;
@@ -78,19 +78,16 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
       .drawImage(this.video.nativeElement, 0, 0, 320, 240);
   }
 
-  gotResults(err, results) {
-    if (err) {
-      return console.error(err);
-    }
-
-    this.zone.run(() => {
-      this.label = results[0].label;
-      this.confidence = results[0].confidence;
-      this.results = results.join(',');
-    });
-
-    this.mobileNetFeatureExtractor.classify((e, r) => {
-      this.gotResults(e, r);
+  predict() {
+    this.mobileNetFeatureExtractor.classify((err, results) => {
+      if (err) {
+        return console.error(err);
+      }
+      this.zone.run(() => {
+        this.label = results[0].label;
+        this.confidence = results[0].confidence;
+        this.results = results;
+      });
     });
   }
 }
