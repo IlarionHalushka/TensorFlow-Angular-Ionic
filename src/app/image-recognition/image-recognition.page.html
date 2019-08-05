@@ -2,27 +2,37 @@
 
 <ion-content padding>
   <ion-card padding>
-    <ion-card-header>
-      <label class="control-label">Label:</label>
-      <input type="text" [(ngModel)]="newLabel" />
-      <button (click)="addImage()" class="btn btn-primary">Add Image</button>
-      <button (click)="train()" class="btn btn-danger">Train</button>
-    </ion-card-header>
-    <div class="row">
+    <ion-card-content>
+      <div class="col-md-4">
+        <ion-button (click)="addImage()" class="btn btn-primary"
+          >1. Add Image</ion-button
+        >
+      </div>
+      <div class="col-md-4">
+        <label class="control-label">Label:</label>
+        <input type="text" [(ngModel)]="newLabel" />
+      </div>
+    </ion-card-content>
+    <ion-card-content>
+      <div class="col-md-4">
+        <ion-button (click)="train()" class="btn btn-danger"
+          >2. Train Model</ion-button
+        >
+        <p>Iteration: {{iteration}}</p>
+        <p>Loss: {{loss}}</p>
+      </div>
       <div class="col-md-4">
         <progress-bar
           [progress]="iteration"
-          [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}"
+          [color-degraded]="{'0': '#00cb49',  '15': '#f9c3d3', '25': '#fd8c8e'}"
         ></progress-bar>
       </div>
-      <div class="col-md-4">
-        <button (click)="predict()" class="btn btn-primary">Predict</button>
-        <p>Iteration: {{iteration}}</p>
-        <p>Loss: {{loss}}</p>
-        <p>results: {{results}}</p>
-      </div>
-    </div>
-    <div>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-button (click)="predict()" class="btn btn-primary"
+        >3. Predict</ion-button
+      >
+      <p>Results: {{results}}</p>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3>{{label}} | {{confidence*100 | number : '0.1'}} %</h3>
@@ -45,6 +55,6 @@
           ></canvas>
         </div>
       </div>
-    </div>
+    </ion-card-content>
   </ion-card>
 </ion-content>
