@@ -1,4 +1,11 @@
-<ion-header padding type="primary">Image Classifier</ion-header>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Image Classifier
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content padding>
     <ng-container *ngIf="loading" >
         <ion-spinner></ion-spinner>
@@ -15,5 +22,4 @@
             <img *ngIf="imageSrc" id="blah" [src]="imageSrc" alt="your image" (load)="predict($event.target)" />
         </ion-card-content>
     </ion-card>
-
 </ion-content>

@@ -8,12 +8,12 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'image-classifier',
+        path: 'image-recognition',
         children: [
           {
             path: '',
             loadChildren:
-              '../image-classifier/image-classifier.module#ImageClassifierPageModule'
+              '../image-recognition/image-recognition.module#ImageRecognitionPageModule'
           }
         ]
       },
@@ -28,25 +28,25 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'image-recognition',
+        path: 'image-classifier',
         children: [
           {
             path: '',
             loadChildren:
-              '../image-recognition/image-recognition.module#ImageRecognitionPageModule'
+              '../image-classifier/image-classifier.module#ImageClassifierPageModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/predict-number',
+        redirectTo: '/tabs/image-recognition',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/predict-number',
+    redirectTo: '/tabs/image-recognition',
     pathMatch: 'full'
   }
 ];
