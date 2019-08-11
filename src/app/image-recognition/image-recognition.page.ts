@@ -13,6 +13,7 @@ declare let ml5: any;
   templateUrl: 'image-recognition.page.html'
 })
 export class ImageRecognitionPage implements OnInit, AfterViewInit {
+  public header = 'Image Recognition';
   public mobileNetFeatureExtractor;
   public featureClassifier;
   public label;

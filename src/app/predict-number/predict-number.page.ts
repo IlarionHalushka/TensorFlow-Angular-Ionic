@@ -10,6 +10,7 @@ const pathToModel = '/assets/model.json';
   styleUrls: ['predict-number.page.scss']
 })
 export class PredictNumberPage implements OnInit {
+  public header = 'Predict Number';
   predictedNumber: string;
   loading: boolean;
   private model: any;

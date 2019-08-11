@@ -7,6 +7,7 @@ declare let ml5: any;
   templateUrl: 'image-classifier.page.html'
 })
 export class ImageClassifierPage implements OnInit {
+  public header = 'Image Classifier';
   private MODEL = 'MobileNet';
   private IMAGE_SIZE = 224;
   imageSrc: string | ArrayBuffer;

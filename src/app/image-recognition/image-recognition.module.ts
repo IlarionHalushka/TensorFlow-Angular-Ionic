@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressBarModule } from 'angular-progress-bar';
+import { ComponentsModule } from '../components/components.module';
 
 declare let ml5: any;
 
@@ -17,7 +18,8 @@ declare let ml5: any;
     FormsModule,
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: ImageRecognitionPage }]),
-    ProgressBarModule
+    ProgressBarModule,
+    ComponentsModule
   ],
   declarations: [ImageRecognitionPage]
 })
