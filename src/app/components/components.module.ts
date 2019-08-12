@@ -4,15 +4,8 @@ import { HeaderComponent } from './header/header.component';
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
-  declarations: [
-    HeaderComponent
-  ],
-  imports: [
-    IonicModule,
-    CommonModule
-  ],
-  exports: [
-    HeaderComponent
-  ]
+  declarations: [HeaderComponent],
+  imports: [IonicModule, CommonModule],
+  exports: [HeaderComponent]
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
