@@ -1,11 +1,9 @@
 <app-header [header]="header"></app-header>
 
+<app-spinner [loading]="loading"></app-spinner>
+
 <ion-content padding>
   <ion-card padding>
-    <ng-container *ngIf="loading" >
-      <ion-spinner></ion-spinner>
-      <ion-text>Loading model</ion-text>
-    </ng-container>
     <div *ngIf="!loading">
       <h3>Draw a number between 0 to 9</h3>
       <canvas class="draw-area"  drawable (newImage)="predict($event)" width="140" height="140"></canvas><br>
