@@ -9,52 +9,54 @@
         >
       </div>
       <div class="col-md-4">
-        <label class="control-label">Label:</label>
-        <input type="text" [(ngModel)]="newLabel" />
+        <input placeholder="label" type="text" [(ngModel)]="newLabel" />
       </div>
     </ion-card-content>
-    <ion-card-content>
+    <ion-card-content *ngIf="showTrainButton">
       <div class="col-md-4">
         <ion-button (click)="train()" class="btn btn-danger"
           >2. Train Model</ion-button
         >
-        <p>Iteration: {{iteration}}</p>
-        <p>Loss: {{loss}}</p>
+        <p *ngIf="iteration">Iteration: {{iteration}}</p>
+        <p *ngIf="loss">Loss: {{loss}}</p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" *ngIf="iteration">
         <progress-bar
           [progress]="iteration"
           [color-degraded]="{'0': '#00cb49',  '15': '#f9c3d3', '25': '#fd8c8e'}"
         ></progress-bar>
       </div>
     </ion-card-content>
-    <ion-card-content>
+    <ion-card-content *ngIf="showPredictButton">
       <ion-button (click)="predict()" class="btn btn-primary"
         >3. Predict</ion-button
       >
-      <p>Results: {{results}}</p>
-      <div class="panel panel-default">
+      <div class="panel panel-default" *ngIf="results">
+        <p>Results: {{results}}</p>
         <div class="panel-heading">
-          <h3>{{label}} | {{confidence*100 | number : '0.1'}} %</h3>
-        </div>
-        <div class="panel-body">
-          <video
-            #video
-            id="video"
-            width="320"
-            height="240"
-            autoplay
-            class="img-thumbnail"
-          ></video>
-          <canvas
-            #canvas
-            id="canvas"
-            width="320"
-            height="240"
-            class="img-thumbnail"
-          ></canvas>
+          <h3>
+            Prediction: {{label}} with probability {{confidence*100 | number :
+            '0.1'}} %
+          </h3>
         </div>
       </div>
     </ion-card-content>
+    <div class="panel-body">
+      <video
+        #video
+        id="video"
+        width="320"
+        height="240"
+        autoplay
+        class="img-thumbnail"
+      ></video>
+      <canvas
+        #canvas
+        id="canvas"
+        width="320"
+        height="240"
+        class="img-thumbnail"
+      ></canvas>
+    </div>
   </ion-card>
 </ion-content>

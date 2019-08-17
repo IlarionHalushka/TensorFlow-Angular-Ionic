@@ -24,6 +24,8 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   public results: string;
   private TRAIN_ITERATIONS_LIMIT = 100;
   private MINIMUM_LOSS = 0.01;
+  public showTrainButton = false;
+  public showPredictButton = false;
   @ViewChild('video') public video: ElementRef;
   @ViewChild('canvas') public canvas: ElementRef;
 
@@ -44,6 +46,7 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
   async addImage() {
     await this.capture();
     this.featureClassifier.addImage(this.newLabel);
+    this.showTrainButton = true;
   }
 
   train() {
@@ -55,6 +58,7 @@ export class ImageRecognitionPage implements OnInit, AfterViewInit {
         this.iteration === this.TRAIN_ITERATIONS_LIMIT
       ) {
         this.iteration = this.TRAIN_ITERATIONS_LIMIT;
+        this.showPredictButton = true;
       } else {
         this.zone.run(() => {
           ++this.iteration;
