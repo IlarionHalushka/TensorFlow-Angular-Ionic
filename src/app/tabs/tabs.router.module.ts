@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'video-classifier',
+        children: [
+          {
+            path: '',
+            loadChildren:
+              '../video-classifier/video-classifier.module#VideoClassifierPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/image-recognition',
         pathMatch: 'full'

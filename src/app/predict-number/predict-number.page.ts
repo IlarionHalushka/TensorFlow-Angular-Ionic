@@ -55,6 +55,7 @@ export class PredictNumberPage implements OnInit {
   }
 
   clear() {
+    this.canvas.clear();
     this.predictedNumber = '';
   }
 }
