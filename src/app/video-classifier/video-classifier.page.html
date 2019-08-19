@@ -1,0 +1,13 @@
+<app-header [header]="header"></app-header>
+
+<app-spinner [loading]="loading"></app-spinner>
+
+<ion-content padding>
+  <ion-card *ngIf="!loading">
+    <ion-card-header>
+      Predictions:
+    </ion-card-header>
+    <ion-card-content>{{ result }} {{ probability }}</ion-card-content>
+  </ion-card>
+  <video #video width="640" height="480" autoplay></video>
+</ion-content>
