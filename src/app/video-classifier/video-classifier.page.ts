@@ -15,8 +15,9 @@ declare let ml5: any;
 export class VideoClassifierPage implements OnInit, AfterViewInit {
   header = 'Video Classifier';
   loading: boolean;
+  results: Array<{ label: string; confidence: number }>;
   result: string;
-  probability: number;
+  probability: string;
   @ViewChild('video') public video: ElementRef;
 
   constructor() {}
@@ -24,27 +25,31 @@ export class VideoClassifierPage implements OnInit, AfterViewInit {
   async ngOnInit() {
     this.loading = true;
     const classifier = await ml5.imageClassifier('MobileNet');
-
     this.loading = false;
+
+    this.video.nativeElement.play();
+
     setInterval(() => {
       this.classify(classifier);
     }, 5000);
   }
 
-  classify = classifier => {
-    classifier.classify(this.video.nativeElement).then(results => {
-      console.log(results);
-      this.result = results[0].label;
-      this.probability = results[0].confidence.toFixed(4);
-    });
-  };
+  async classify(classifier) {
+    this.results = await classifier.classify(this.video.nativeElement);
 
-  public ngAfterViewInit() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.video.nativeElement.srcObject = stream;
-        this.video.nativeElement.play();
-      });
+    this.result = this.results[0].label;
+    this.probability = this.results[0].confidence.toFixed(4);
+  }
+
+  public async ngAfterViewInit() {
+    if (navigator.mediaDevices && !navigator.mediaDevices.getUserMedia) {
+      return;
     }
+
+    this.video.nativeElement.srcObject = await navigator.mediaDevices.getUserMedia(
+      {
+        video: true
+      }
+    );
   }
 }

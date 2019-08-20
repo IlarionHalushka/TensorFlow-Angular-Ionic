@@ -3,11 +3,22 @@
 <app-spinner [loading]="loading"></app-spinner>
 
 <ion-content padding>
-  <ion-card *ngIf="!loading">
+  <ion-card *ngIf="!loading && results && results.length">
     <ion-card-header>
       Predictions:
     </ion-card-header>
-    <ion-card-content>{{ result }} {{ probability }}</ion-card-content>
+    <ion-card-content *ngFor="let result of results"
+      >{{ result.label }} {{ result.confidence }}</ion-card-content
+    >
   </ion-card>
-  <video #video width="640" height="480" autoplay></video>
+  <video
+    #video
+    width="320"
+    height="320"
+    autoplay
+    style="display: block;
+          background-color: #eee;
+          margin-left: auto;
+          margin-right: auto;"
+  ></video>
 </ion-content>
