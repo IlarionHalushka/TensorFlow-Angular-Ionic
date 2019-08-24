@@ -10,7 +10,8 @@ declare let ml5: any;
 
 @Component({
   selector: 'app-video-classifier',
-  templateUrl: './video-classifier.page.html'
+  templateUrl: './video-classifier.page.html',
+  styleUrls: ['./video-classifier.page.scss']
 })
 export class VideoClassifierPage implements OnInit, AfterViewInit {
   header = 'Video Classifier';
@@ -18,6 +19,7 @@ export class VideoClassifierPage implements OnInit, AfterViewInit {
   results: Array<{ label: string; confidence: number }>;
   result: string;
   probability: string;
+  private INTERVAL = 5000;
   @ViewChild('video') public video: ElementRef;
 
   constructor() {}
@@ -31,7 +33,7 @@ export class VideoClassifierPage implements OnInit, AfterViewInit {
 
     setInterval(() => {
       this.classify(classifier);
-    }, 5000);
+    }, this.INTERVAL);
   }
 
   async classify(classifier) {
