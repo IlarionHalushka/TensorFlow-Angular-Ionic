@@ -2,16 +2,22 @@ import { Component, Input, OnInit } from '@angular/core';
 
 declare let ml5: any;
 
+interface IPrediction {
+  label: string;
+  confidence: number;
+}
+
 @Component({
   selector: 'app-image-classifier',
-  templateUrl: 'image-classifier.page.html'
+  templateUrl: 'image-classifier.page.html',
+  styleUrls: ['image-classifier.page.scss']
 })
 export class ImageClassifierPage implements OnInit {
   public header = 'Image Classifier';
   private MODEL = 'MobileNet';
   private IMAGE_SIZE = 224;
   imageSrc: string | ArrayBuffer;
-  predictions: Array<object>;
+  predictions: Array<IPrediction>;
   loading: boolean;
 
   @Input() classifier;

@@ -10,8 +10,8 @@ declare let ml5: any;
 
 @Component({
   selector: 'app-video-classifier',
-  templateUrl: './video-classifier.page.html',
-  styleUrls: ['./video-classifier.page.scss']
+  templateUrl: 'video-classifier.page.html',
+  styleUrls: ['video-classifier.page.scss']
 })
 export class VideoClassifierPage implements OnInit, AfterViewInit {
   header = 'Video Classifier';

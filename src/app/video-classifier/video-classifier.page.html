@@ -3,13 +3,7 @@
 <app-spinner [loading]="loading"></app-spinner>
 
 <ion-content padding>
-  <video
-    #video
-    width="320"
-    height="240"
-    autoplay
-    class="video"
-  ></video>
+  <video #video width="320" height="240" autoplay class="video"></video>
   <ion-card *ngIf="!loading && results && results.length">
     <ion-card-header>
       Predictions:
