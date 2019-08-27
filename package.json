@@ -1,8 +1,8 @@
 {
-  "name": "photo-gallery",
+  "name": "ml-examples",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Ilarion Halushka",
+  "homepage": "github.com/IlarionHalushka",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -71,7 +71,7 @@
     "tslint": "~5.17.0",
     "typescript": "~3.1.6"
   },
-  "description": "An Ionic project",
+  "description": "A project with examples of using ML on the web",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
