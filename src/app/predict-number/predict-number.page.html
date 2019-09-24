@@ -15,7 +15,13 @@
       ></canvas
       ><br />
       <ion-button color="danger" (click)="clear()">Erase</ion-button>
-      <h1 *ngIf="predictedNumber">Predicted Number: {{predictedNumber}}</h1>
     </div>
+  </ion-card>
+
+  <ion-card *ngIf="!loading && predictedNumber">
+    <ion-card-header>
+      Predicted Number:
+    </ion-card-header>
+    <ion-card-content>{{ predictedNumber }}</ion-card-content>
   </ion-card>
 </ion-content>

@@ -11,8 +11,8 @@ const pathToModel = '/assets/model.json';
 })
 export class PredictNumberPage implements OnInit {
   public header = 'Predict Number';
-  predictedNumber: string;
-  loading: boolean;
+  public predictedNumber: string;
+  public loading: boolean;
   private model: any;
   private predictions: any;
 
