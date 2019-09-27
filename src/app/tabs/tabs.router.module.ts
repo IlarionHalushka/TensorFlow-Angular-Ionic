@@ -48,6 +48,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'pix2pix',
+        children: [
+          {
+            path: '',
+            loadChildren: './pix2pix/pix2pix.module#Pix2pixPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/image-recognition',
         pathMatch: 'full'

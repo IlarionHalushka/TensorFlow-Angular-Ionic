@@ -1,0 +1,25 @@
+<app-header [header]="header"></app-header>
+
+<!--<app-spinner [loading]="loading"></app-spinner>-->
+
+<ion-content padding>
+  <!--<ion-card *ngIf="!loading">-->
+  <!--<ion-card-header>-->
+  <!--<input type="file" (change)="readURL($event);" />-->
+  <!--</ion-card-header>-->
+  <!--<ion-card-content>-->
+  <!--<ng-container *ngIf="predictions && predictions.length">-->
+  <!--<div *ngFor="let prediction of predictions">-->
+  <!--Prediction: {{ prediction.label }} {{prediction.confidence}}-->
+  <!--</div>-->
+  <!--</ng-container>-->
+  <!--</ion-card-content>-->
+  <!--</ion-card>-->
+  <canvas
+    class="draw-area"
+    drawable
+    (newImage)="predict()"
+    width="140"
+    height="140"
+  ></canvas>
+</ion-content>
