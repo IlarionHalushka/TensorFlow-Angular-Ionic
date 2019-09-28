@@ -7,7 +7,6 @@ const pathToModel = '/assets/model.json';
 @Component({
   selector: 'app-predict-number',
   templateUrl: 'predict-number.page.html',
-  styleUrls: ['predict-number.page.scss']
 })
 export class PredictNumberPage implements OnInit {
   public header = 'Predict Number';

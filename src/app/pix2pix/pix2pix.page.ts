@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { DrawableDirective } from '../directives/drawable.directive';
 
 declare let ml5: any;
 
@@ -7,10 +8,11 @@ interface IPrediction {
   confidence: number;
 }
 
+const pathToModel = '/assets/edges2cats_AtoB.pict';
+
 @Component({
   selector: 'app-pix2pix',
-  templateUrl: './pix2pix.page.html',
-  styleUrls: ['./pix2pix.page.scss']
+  templateUrl: './pix2pix.page.html'
 })
 export class Pix2pixPage implements OnInit {
   public header = 'Pix2Pix';
@@ -29,15 +31,16 @@ export class Pix2pixPage implements OnInit {
   public loading: boolean;
   predictions: Array<IPrediction>;
   @ViewChild('video') public video: ElementRef;
-  @ViewChild('canvas') public canvas: ElementRef;
+  // @ViewChild('canvas') public canvas: ElementRef;
 
   @Input() classifier;
+  @ViewChild(DrawableDirective) canvas;
 
   constructor() {}
 
   async ngOnInit() {
     this.loading = true;
-    this.classifier = await ml5.pix2pix('models/customModel.pict');
+    this.classifier = await ml5.pix2pix(pathToModel);
     this.loading = false;
   }
 
@@ -48,5 +51,9 @@ export class Pix2pixPage implements OnInit {
         console.log(result);
       }
     );
+  }
+
+  clear() {
+    this.canvas.clear();
   }
 }

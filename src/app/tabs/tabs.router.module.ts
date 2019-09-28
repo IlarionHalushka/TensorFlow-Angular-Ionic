@@ -52,7 +52,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './pix2pix/pix2pix.module#Pix2pixPageModule'
+            loadChildren: '../pix2pix/pix2pix.module#Pix2pixPageModule'
           }
         ]
       },

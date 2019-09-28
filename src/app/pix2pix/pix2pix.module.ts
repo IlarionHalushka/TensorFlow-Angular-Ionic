@@ -7,9 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { Pix2pixPage } from './pix2pix.page';
 import { HttpClientModule } from '@angular/common/http';
-import { ImageRecognitionPage } from '../image-recognition/image-recognition.page';
 import { ProgressBarModule } from 'angular-progress-bar';
 import { ComponentsModule } from '../components/components.module';
+import { DrawableDirective } from '../directives/drawable.directive';
 
 declare let ml5: any;
 
@@ -19,10 +19,10 @@ declare let ml5: any;
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forChild([{ path: '', component: ImageRecognitionPage }]),
+    RouterModule.forChild([{ path: '', component: Pix2pixPage }]),
     ProgressBarModule,
     ComponentsModule
   ],
-  declarations: [Pix2pixPage]
+  declarations: [Pix2pixPage, DrawableDirective]
 })
 export class Pix2pixPageModule {}
