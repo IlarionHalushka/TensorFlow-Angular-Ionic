@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DrawableDirective } from '../directives/drawable.directive';
+import * as tf from '@tensorflow/tfjs';
 
 declare let ml5: any;
 
@@ -44,13 +45,30 @@ export class Pix2pixPage implements OnInit {
     this.loading = false;
   }
 
-  async predict() {
-    this.predictions = await this.classifier.transfer(
-      this.canvas,
-      (err, result) => {
+  private pixelsToShape(imageData) {
+    let img = tf.browser.fromPixels(imageData, 1);
+    // @ts-ignore
+    img = img.reshape([1, 28, 28, 1]);
+    console.log('bbb');
+    return tf.cast(img, 'float32');
+  }
+
+  async predict(imageData: any) {
+    await tf.tidy(() => {
+      const img = this.pixelsToShape(imageData);
+      console.log(typeof imageData);
+      console.log(typeof img);
+      this.classifier.transfer(img, (err, result) => {
+        console.log('eeee');
         console.log(result);
-      }
-    );
+      });
+    });
+    // const img = this.pixelsToShape(imageData);
+    // console.log(img);
+    // this.predictions = await this.classifier.transfer(img, (err, result) => {
+    //   console.log('eeee');
+    //   console.log(result);
+    // });
   }
 
   clear() {
